@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class fuli {
 
 	/**
@@ -8,21 +7,68 @@ public class fuli {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		Scanner caculate=new Scanner(System.in);
+		System.out.println("请选择1/2/3：\n1.复利计算终值2.复利计算本金3.单利计算本息");
+		int a=caculate.nextInt();
+		if(a==1)
+			fuli.CFutureValue();
+		else if(a==2)
+			fuli.CPresentValue();
+		else if(a==3)
+			fuli.PrincipalAndInterest();
+		else
+		{
+			System.out.println("\n您的输入错误，请输入1/2/3：");
+		}
 		
+		
+	}
+
+	// 复利计算终值
+	static void CFutureValue() {
 		Scanner fuli = new Scanner(System.in);
 		System.out.println("请输入本金：");
 		double PresentValue = fuli.nextDouble(); // 本金
 		System.out.println("请输入存款年数：");
-		int Annuity = fuli.nextInt(); // 存钱年数
-		System.out.println("请输入存款金额：");
-		double FutureValue = fuli.nextDouble(); // 存款总额
+		int year = fuli.nextInt(); // 存钱年数
 		System.out.println("请输入利率：");
 		double r = fuli.nextDouble(); // 利率
-		for (int i = 1; i <= Annuity; i++) {
-			FutureValue = (1 + r) * i * PresentValue;
-			System.out.println("存入第" + i + "年后的存款总额为：" + FutureValue);
+		double sum = 1;
+		for (int i = 1; i <= year; i++) {
+			sum = (1 + r) * sum;
 		}
-		
+		System.out.println("总额为：" + sum * PresentValue);
+	}
+
+	// 复利计算本金
+	static void CPresentValue() {
+
+		Scanner fuli = new Scanner(System.in);
+		System.out.println("请输入终值：");
+		double sum = fuli.nextDouble(); // 终值
+		System.out.println("请输入存款年数：");
+		int year = fuli.nextInt(); // 存钱年数
+		System.out.println("请输入利率：");
+		double r = fuli.nextDouble(); // 利率
+		double PresentValue = 1;
+		for (int i = 1; i <= year; i++) {
+			PresentValue = (1 + r) * PresentValue;
+		}
+		System.out.println("总额为：" + sum * (1 / PresentValue));
+	}
+
+	// 单利计算本息
+	static void PrincipalAndInterest() {
+		Scanner danli = new Scanner(System.in);
+		System.out.println("请输入本金：");
+		double PresentValue = danli.nextDouble(); // 本金
+		System.out.println("请输入存款年数：");
+		int Annuity = danli.nextInt(); // 存钱年数
+		System.out.println("请输入利率：");
+		double r = danli.nextDouble(); // 利率
+		double sum1 = 1;
+		sum1 = (1 + r * Annuity) * PresentValue;
+		System.out.println("本息为：" + sum1);
 	}
 
 }
